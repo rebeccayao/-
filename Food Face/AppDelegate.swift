@@ -48,3 +48,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+import Foundation
+
+let headers = [
+    "x-rapidapi-host": "ivladmin-face-detection.p.rapidapi.com",
+    "x-rapidapi-key": "57a4da814bmshf4b0d8452246307p10bdbcjsnc2c87932a535",
+    "content-type": "application/x-www-form-urlencoded"
+]
+
+let postData = NSMutableData(data: "objecturl=http://er128.eyerecognize.com/img/jfd_group.jpg".data(using: String.Encoding.utf8)!)
+
+let request = NSMutableURLRequest(url: URL(string: "https://ivladmin-face-detection.p.rapidapi.com/faceSearch/detectFaces"),
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0,
+                                    httpMethod: "POST",
+                                    allHTTPHeaderFields: headers,
+                                    httpBody: postData )
+
+let session = URLSession.shared
+let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+    if (error != nil) {
+        print(error ?? <#default value#>)
+    } else {
+        let httpResponse = response as? HTTPURLResponse
+        print(httpResponse ?? <#default value#>)
+    }
+})
+
+//    dataTask.resume()
